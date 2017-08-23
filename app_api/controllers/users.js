@@ -6,12 +6,17 @@ const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 
 const createUser = (req,res) => {
-  console.log(`${req.body.fullName}`);
-  res
-      .status(200)
-      .json({"status": "success"})
+
+  User.find((err,user)=>{
+      if(user){
+          res
+              .status(200)
+              .json({user})
+      }
+  });
+  //console.log(`${req.body.fullName}`);
 };
 
 module.exports = {
     createUser
-}
+};
