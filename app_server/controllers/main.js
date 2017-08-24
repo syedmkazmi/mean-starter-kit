@@ -4,7 +4,7 @@
 
 // route controller for home page
 let getHomePage = (req, res) => {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Mean Starter App' });
 };
 
 module.exports = {
