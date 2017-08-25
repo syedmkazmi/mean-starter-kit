@@ -5,7 +5,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
 
-const createUser = (req,res) => {
+let getAllUsers = (req,res) => {
 
   User.find((err,user)=>{
       if(user){
@@ -18,5 +18,5 @@ const createUser = (req,res) => {
 };
 
 module.exports = {
-    createUser
+    getAllUsers
 };
