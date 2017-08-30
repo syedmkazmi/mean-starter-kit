@@ -25,8 +25,7 @@ userSchema.methods.validPassword = function (password) {
 
 
 // generate JWT tokens for valid users
-userSchema.methods.generateJwt = () => {
-
+userSchema.methods.generateJwt = function () {
     let expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
 
