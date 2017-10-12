@@ -32,3 +32,6 @@ npm-debug.log
 #Environment Files / variables
 *.idea
 .env
+
+#System Files
+.DS_Store
