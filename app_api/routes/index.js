@@ -19,7 +19,7 @@ router
     .post(loginUser);
 
 // middleware for token authentication
-router.use((req, res, next)=>{
+/*router.use((req, res, next)=>{
     let token = req.body.token || req.query.token ||req.headers['x-access-token'];
 
     if(token){
@@ -37,7 +37,7 @@ router.use((req, res, next)=>{
             .status(403)
             .send({message: "No Token Provided."});
     }
-});
+});*/
 
 // users
 router

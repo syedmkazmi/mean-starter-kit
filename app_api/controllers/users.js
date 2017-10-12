@@ -4,16 +4,23 @@
 
 const mongoose = require('mongoose');
 const User = mongoose.model('Users');
+mongoose.Promise = Promise;
 
 let getAllUsers = (req,res) => {
-    //if (!req.user) return res.sendStatus(401);
-  User.find((err,user)=>{
-      if(user){
-          res
-              .status(200)
-              .json({user})
-      }
-  });
+  User.find()
+      .exec()
+      .then((user)=>{
+        if(user) {
+            return res
+                .status(200)
+                .json({user})
+        }
+      })
+      .catch((err)=>{
+        return res
+            .status(500)
+            .json(err)
+     });
   //console.log(`${req.body.fullName}`);
 };
 

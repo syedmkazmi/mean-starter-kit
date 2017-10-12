@@ -2,7 +2,7 @@
  * Created by syedkazmi on 21/08/2017.
  */
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://syed26:plzopen26@ds013848.mlab.com:13848/tokenbasedauth'
+const dbURI = 'mongodb://syed26:plzopen26@ds013848.mlab.com:13848/tokenbasedauth';
 mongoose.connect(dbURI, { useMongoClient: true });
 
 mongoose.connection.on('connected', () => {
