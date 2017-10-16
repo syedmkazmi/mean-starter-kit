@@ -18,24 +18,36 @@ let register = (req,res) => {
         return;
     }
 
-    let user = new User();
+    User.findOne({email: req.body.email})
+        .exec()
+        .then((user)=>{
+            if(user) {
+                sendJsonResponse(res, 400, {"message": "User Already Registered"});
+            } else if(!user) {
+                let user = new User();
 
-    user.fullName = req.body.fullName;
-    user.email = req.body.email;
-    user.password = user.generateHash(req.body.password);
+                user.fullName = req.body.fullName;
+                user.email = req.body.email;
+                user.password = user.generateHash(req.body.password);
 
-    user.save((err) => {
-        let token;
+                user.save((err) => {
+                    let token;
 
-        if(err){ sendJsonResponse(res, 404, err);}
-        else {
-            token = user.generateJwt();
-            sendJsonResponse(res, 200, {
-               "token": token
-            });
-        }
-    });
-
+                    if(err){ sendJsonResponse(res, 404, err);}
+                    else {
+                        token = user.generateJwt();
+                        sendJsonResponse(res, 200, {
+                            "token": token
+                        });
+                    }
+                });
+            }
+        })
+        .catch((err)=>{
+            return res
+                .status(500)
+                .json(err)
+        });
 };
 
 // login function
