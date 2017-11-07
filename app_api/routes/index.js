@@ -26,6 +26,10 @@ router.use((req, res, next)=>{
         //verify token by checking secret & expiry date
         jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
            if(err){
+               if(err.name === 'TokenExpiredError'){
+                   res.json(err);
+                   return
+               }
                return res.json({message: "Failed Authenticate Token"})
            } else {
                req.decoded = decoded;
