@@ -28,13 +28,12 @@ userSchema.methods.validPassword = function (password) {
 userSchema.methods.generateJwt = function () {
     let expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
-
+    //console.log("EXPIRY " + expiry.getTime()/1000);
     return jwt.sign({
        _id: this._id,
         email: this.email,
         fullName: this.fullName,
-        exp: parseInt(expiry.getTime()/1000),
-    }, process.env.JWT_SECRET);
+    }, process.env.JWT_SECRET, {expiresIn: 60});
 
 };
 

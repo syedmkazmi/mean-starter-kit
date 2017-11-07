@@ -52,8 +52,8 @@ let register = (req,res) => {
 
 // login function
 let login = (req,res) => {
-
     if(!req.body.email || !req.body.password){
+        console.log("Server " + JSON.stringify(req.headers));
         sendJsonResponse(res, 400, {"message": "All fields required"});
         return;
     }
@@ -68,7 +68,7 @@ let login = (req,res) => {
 
         if(user){
             token = user.generateJwt();
-            sendJsonResponse(res, 200, {"token": token});
+            sendJsonResponse(res, 200, {"token": token, "expiresIn": 60});
          } else {
             sendJsonResponse(res, 401, info);
         }

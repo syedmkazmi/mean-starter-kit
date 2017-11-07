@@ -9,11 +9,11 @@ mongoose.Promise = Promise;
 let getAllUsers = (req,res) => {
   User.find()
       .exec()
-      .then((user)=>{
-        if(user) {
+      .then((data)=>{
+        if(data) {
             return res
                 .status(200)
-                .json({user})
+                .json(data)
         }
       })
       .catch((err)=>{
