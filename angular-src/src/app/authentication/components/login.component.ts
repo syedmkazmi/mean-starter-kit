@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { AuthenticationService } from "../services/authentication.service";
+import {NotificationsService} from "../../root/services/notifications.service";
 
 @Component({
   templateUrl: './login.component.html',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoggedIn: boolean = false;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthenticationService) { }
+  constructor(private _fb: FormBuilder, private _authService: AuthenticationService, private _notificationService: NotificationsService) { }
 
   ngOnInit() {
     this.loginForm =  this._fb.group({
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong,
+          this._notificationService.sendNotification(err.error.message);
           console.log(`Backend returned code ${err.status}, body was: ${err.error.message}`);
         }
       }

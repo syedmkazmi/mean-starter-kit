@@ -9,6 +9,7 @@ import {IAuthToken} from "../interfaces/userToken";
 import {Router} from "@angular/router";
 import {Subject} from 'rxjs/Subject';
 import * as moment from "moment";
+import { environment } from "../../../environments/environment";
 
 @Injectable()
 export class AuthenticationService {
@@ -18,7 +19,8 @@ export class AuthenticationService {
   }
 
   login(body): Observable<IAuthToken> {
-    const BASE_URL = "http://localhost:3000";
+    //const DEV_BASE_URL = "http://localhost:3000";
+    const BASE_URL = environment.apiUrl;
 
     return this._http.post<IAuthToken>(BASE_URL + '/api/login', body)
       .do(data => console.log(JSON.stringify(data)))
