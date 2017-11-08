@@ -14,13 +14,15 @@ import {RootNavComponent} from '../root-navigation/root-nav.component';
 import {ErrorInterceptorService} from "../authentication/services/error-interceptor.service";
 import {NotificationsComponent } from './components/notifications.component';
 import {NotificationsService} from "./services/notifications.service";
+import { PageNotFoundComponent } from './components/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     RootNavComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
