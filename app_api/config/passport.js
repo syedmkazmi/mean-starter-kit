@@ -14,7 +14,7 @@ passport.use(new LocalStrategy({
                 return done(err);
             }
             if(!user){
-                return done(null, false, {message: 'Incorrect Email.'});
+                return done(null, false, {message: `No User Account Exists for ${email}`});
             }
             if(!user.validPassword(password)){
                 return done(null, false, {message: 'Incorrect Password.'});
