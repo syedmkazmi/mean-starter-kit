@@ -25,7 +25,8 @@ export class AuthenticationService {
       .map(data => {
 
         const token = data.token;
-        const expiresIn = moment().add(data.expiresIn, 'second');
+        const unit :moment.unitOfTime.DurationConstructor = 'hour';
+        const expiresIn = moment().add(1, unit);
 
         if (token) {
           localStorage.setItem("token", JSON.stringify(token));
