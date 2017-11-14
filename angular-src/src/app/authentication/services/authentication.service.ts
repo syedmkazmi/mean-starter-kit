@@ -9,13 +9,29 @@ import {IAuthToken} from "../interfaces/userToken";
 import {Router} from "@angular/router";
 import {Subject} from 'rxjs/Subject';
 import * as moment from "moment";
-import { environment } from "../../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class AuthenticationService {
   private subject = new Subject<any>();
 
   constructor(private _http: HttpClient, private _router: Router) {
+  }
+
+  signUp(body): Observable<IAuthToken> {
+
+    const BASE_URL = environment.apiUrl;
+
+    return this._http.post<IAuthToken>(BASE_URL + '/api/register', body)
+      .do(data => console.log(data))
+      .catch(err => {
+        // do whatever you want when error occurs
+        console.log(err);
+
+        // re-throw error so you can catch it when subscribing, fallback to generic error code
+        return Observable.throw(err || 'API_ERROR');
+      });
+    //return body
   }
 
   login(body): Observable<IAuthToken> {
@@ -27,7 +43,7 @@ export class AuthenticationService {
       .map(data => {
 
         const token = data.token;
-        const unit :moment.unitOfTime.DurationConstructor = 'hour';
+        const unit: moment.unitOfTime.DurationConstructor = 'hour';
         const expiresIn = moment().add(1, unit);
 
         if (token) {
