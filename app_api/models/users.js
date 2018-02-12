@@ -10,6 +10,9 @@ const userSchema =  new mongoose.Schema({
     email: String,
     password: String,
     fullName: String,
+    account: {
+        verified: {type: String, default: 'false'}
+    }
 });
 
 

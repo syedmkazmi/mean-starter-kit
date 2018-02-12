@@ -48,5 +48,9 @@ router
     .route('/users')
     .get(findUser);
 
+// proposals
+router
+    .route('/proposals')
+    .get(findUser);
 
 module.exports = router;
